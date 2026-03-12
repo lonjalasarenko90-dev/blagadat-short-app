@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DramaBox</title>
+<script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║              DRAMABOX — ФАЙЛ КОНТЕНТУ                       ║
+// ║  Змінюйте тільки цей файл, щоб редагувати тексти та відео  ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+// ================================================================
+// 👇 РЕДАГУЙТЕ ТУТ — назви серіалів, серії, описи, відео, ціни
+// ================================================================
+const CONTENT = {
+
+  // ── Назва та налаштування сайту ──────────────────────────────
+  appName: "DramaBox",
+  appTagline: "Міні-серіали",
+  coinPrice: {
+    small:  { coins: 10, price: "29 грн",  label: "Старт" },
+    medium: { coins: 30, price: "69 грн",  label: "Популярний 🔥" },
+    large:  { coins: 80, price: "149 грн", label: "Максимум" },
+  },
+  episodeCost: 5,  // скільки монет коштує одна серія
+
+  // ── Серіали та серії ─────────────────────────────────────────
+  // Щоб додати новий серіал — просто скопіюйте блок {} нижче
+  // Щоб додати серію — додайте {} в масив episodes
+  serials: [
+    {
+      id: 1,
+      title: "Мільярдер і Я",
+      genre: "Романтика • Драма",
+      emoji: "💔",
+      color: "#e63462",             // колір серіалу
+      gradient: ["#3d0c0c","#0f0000"],
+      episodes: [
+        {
+          id: 1,
+          title: "Незнайомець у ліфті",
+          description: "Аліна заходить у ліфт і бачить чоловіка, якого вважала мертвим три роки тому. Він дивиться на неї — як на чужу.",
+          cliffhanger: "Він знає, хто вона. Але мовчить...",
+          video: "videos/episode1.mp4",   // шлях до відео (залиште "" якщо немає)
+          poster: "",                      // обкладинка (необов'язково)
+          free: true,                      // true = безкоштовна
+          duration: "1:42",
+        },
+        {
+          id: 2,
+          title: "Таємниця в конверті",
+          description: "Анонімний лист лежить на столі. Єдине речення: «Твій чоловік — не той, ким здається».",
+          cliffhanger: "Хто написав? І як вони дізналися?",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "1:58",
+        },
+        {
+          id: 3,
+          title: "Брехня на вечері",
+          description: "Сімейна вечеря. Всі посміхаються. Але під столом — три телефони, три розмови, три таємниці.",
+          cliffhanger: "Хтось із них — не той, ким здається...",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "2:05",
+        },
+        {
+          id: 4,
+          title: "Дзвінок опівночі",
+          description: "О 00:00 телефон задзвонив. Невідомий номер. Голос вимовив лише одне слово — її ім'я.",
+          cliffhanger: "Цей голос вона хотіла забути назавжди...",
+          video: "",
+          poster: "",
+          free: false,
+          duration: "1:33",
+        },
+        {
+          id: 5,
+          title: "Повернення",
+          description: "Він повернувся без попередження. З новим іменем. З новим обличчям. Але зі старою таємницею.",
+          cliffhanger: "Двері відчинились. І час зупинився...",
+          video: "",
+          poster: "",
+          free: false,
+          duration: "2:17",
+        },
+      ]
+    },
+
+    {
+      id: 2,
+      title: "Тіні Сеула",
+      genre: "Трилер • Містика",
+      emoji: "🌙",
+      color: "#3949ab",
+      gradient: ["#0a0a2e","#02021a"],
+      episodes: [
+        {
+          id: 1,
+          title: "Перший туман",
+          description: "Детектив Мін знаходить записку, написану її власним почерком. Але вона її не писала.",
+          cliffhanger: "Хто міг знати її підпис настільки точно?",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "1:55",
+        },
+        {
+          id: 2,
+          title: "Тінь у дзеркалі",
+          description: "Стара готельна кімната. Дзеркало показує не те, що є. За спиною — тінь, якої немає.",
+          cliffhanger: "Це маячня? Чи хтось справді там?",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "2:10",
+        },
+        {
+          id: 3,
+          title: "Зниклий файл",
+          description: "Секретне досьє зникло. В архіві — лише порожня папка і запах паперу, що горів.",
+          cliffhanger: "Справу закрили. Але хтось боявся правди.",
+          video: "",
+          poster: "",
+          free: false,
+          duration: "1:48",
+        },
+      ]
+    },
+
+    {
+      id: 3,
+      title: "Зрада на Мільйон",
+      genre: "Драма • Інтриги",
+      emoji: "💸",
+      color: "#2e7d32",
+      gradient: ["#0a1f0b","#030903"],
+      episodes: [
+        {
+          id: 1,
+          title: "Партнери",
+          description: "Двоє найкращих друзів. Один бізнес. І один із них вже збрехав — ще до підписання контракту.",
+          cliffhanger: "Дружба чи гра? З першого дня...",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "1:44",
+        },
+        {
+          id: 2,
+          title: "Підписаний чек",
+          description: "Перший мільйон на рахунку. Святкування. Шампанське. І транзакція, яку ніхто не мав бачити.",
+          cliffhanger: "Куди пішли 200 тисяч?",
+          video: "",
+          poster: "",
+          free: true,
+          duration: "2:00",
+        },
+        {
+          id: 3,
+          title: "Схема",
+          description: "Бухгалтер знайшла цифри, яких не повинно існувати. Тепер вона знає забагато.",
+          cliffhanger: "Вона вже надіслала скріншот. Комусь.",
+          video: "",
+          poster: "",
+          free: false,
+          duration: "1:52",
+        },
+      ]
+    },
+  ]
+};
+
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent: #ff2d55; --gold: #ffd60a; --green: #30d158;
+  --text: #fff; --muted: rgba(255,255,255,.5);
+  --border: rgba(255,255,255,.12); --surface: rgba(255,255,255,.08);
+}
+html, body {
+  background: #000; color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  height: 100%; overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  user-select: none; -webkit-tap-highlight-color: transparent;
+}
+#app { max-width: 430px; height: 100vh; margin: 0 auto; position: relative; overflow: hidden; background: #000; }
+
+/* Feed */
+#feed { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+#feed::-webkit-scrollbar { display: none; }
+
+/* Card */
+.drama-card { height: 100vh; scroll-snap-align: start; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+
+/* Video */
+.card-video-wrap { position: absolute; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; }
+.card-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tap-area { position: absolute; inset: 0; z-index: 5; cursor: pointer; }
+.pause-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0); background: rgba(0,0,0,.6); backdrop-filter: blur(8px); border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 6; opacity: 0; transition: transform .15s, opacity .25s; pointer-events: none; }
+.pause-icon.show { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+
+/* Sim bg */
+.sim-bg { position: absolute; inset: 0; }
+.sim-emoji { position: absolute; font-size: 200px; opacity: .07; filter: blur(8px); top: 50%; left: 50%; transform: translate(-50%,-54%); pointer-events: none; line-height: 1; }
+.sim-bg::after { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity: .5; pointer-events: none; }
+
+/* Scrim */
+.scrim { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.12) 0%, transparent 28%, transparent 38%, rgba(0,0,0,.5) 62%, rgba(0,0,0,.9) 83%, rgba(0,0,0,.97) 100%); pointer-events: none; z-index: 4; }
+
+/* Progress */
+.prog-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.18); z-index: 20; }
+.prog-fill { height: 100%; width: 0%; border-radius: 0 2px 2px 0; transition: width .2s linear; }
+
+/* Top */
+.card-top { position: absolute; top: 14px; left: 0; right: 0; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; z-index: 15; }
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; }
+.logo span { color: var(--accent); }
+.coins-pill { background: rgba(0,0,0,.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.2); padding: 6px 12px; border-radius: 20px; font-size: 13px; color: var(--gold); cursor: pointer; display: flex; align-items: center; gap: 5px; }
+
+.ep-strip { position: absolute; top: 58px; left: 16px; background: rgba(0,0,0,.55); backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); z-index: 15; }
+
+/* Actions */
+.actions { position: absolute; right: 14px; bottom: 150px; display: flex; flex-direction: column; align-items: center; gap: 16px; z-index: 15; }
+.action-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; background: none; border: none; color: var(--text); }
+.action-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,.55); backdrop-filter: blur(12px); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; transition: transform .15s; }
+.action-btn:active .action-icon { transform: scale(.86); }
+.action-btn.liked .action-icon { background: rgba(255,45,85,.28); border-color: var(--accent); }
+.action-label { font-size: 11px; color: var(--muted); }
+
+/* Bottom */
+.card-bottom { position: relative; z-index: 15; padding: 0 16px 90px; }
+.serial-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,.5); backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 10px; cursor: pointer; }
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ep-title { font-family: 'Cormorant Garamond', serif; font-size: 25px; line-height: 1.22; margin-bottom: 8px; text-shadow: 0 2px 18px rgba(0,0,0,.9); }
+.ep-desc { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.8); margin-bottom: 10px; font-style: italic; text-shadow: 0 1px 10px rgba(0,0,0,.95); }
+.ep-cliff { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+.video-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,45,85,.18); border: 1px solid rgba(255,45,85,.4); padding: 4px 10px; border-radius: 8px; font-size: 11px; color: var(--accent); margin-bottom: 12px; }
+.play-btn { background: var(--accent); border: none; color: #fff; padding: 10px 22px; border-radius: 11px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 18px rgba(255,45,85,.45); }
+
+/* Lock */
+.lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.78); backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; padding: 28px; }
+.lock-icon { font-size: 52px; margin-bottom: 16px; }
+.lock-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 8px; text-align: center; }
+.lock-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; text-align: center; line-height: 1.65; }
+.lock-cost { background: rgba(255,255,255,.06); border: 1px solid var(--border); border-radius: 14px; padding: 14px 20px; margin-bottom: 20px; text-align: center; width: 100%; }
+.lock-cost-num { font-size: 30px; font-weight: 700; color: var(--gold); }
+.lock-cost-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.lock-btn { background: var(--accent); border: none; color: #fff; padding: 15px 0; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; width: 100%; margin-bottom: 10px; box-shadow: 0 4px 24px rgba(255,45,85,.4); }
+.lock-btn-alt { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 12px 0; border-radius: 14px; font-size: 14px; cursor: pointer; font-family: 'DM Sans', sans-serif; width: 100%; }
+
+/* Scroll hint */
+.scroll-hint { position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.4); font-size: 12px; letter-spacing: .5px; display: flex; flex-direction: column; align-items: center; gap: 4px; animation: bounce 2s ease infinite; z-index: 15; pointer-events: none; }
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-7px); } }
+
+/* Bottom nav */
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: rgba(0,0,0,.9); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,.07); display: flex; padding: 10px 0 20px; z-index: 100; }
+.nav-btn { flex: 1; background: none; border: none; color: rgba(255,255,255,.38); font-size: 11px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: color .2s; }
+.nav-btn.active { color: #fff; }
+.nav-icon { font-size: 22px; }
+
+/* Filter bar */
+.filter-bar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; padding: 12px 14px; display: flex; gap: 8px; overflow-x: auto; z-index: 50; scrollbar-width: none; opacity: 0; pointer-events: none; transition: opacity .25s; background: linear-gradient(to bottom, rgba(0,0,0,.8) 0%, transparent 100%); }
+.filter-bar.open { opacity: 1; pointer-events: all; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.fpill { background: rgba(0,0,0,.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.7); padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all .2s; }
+.fpill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.82); backdrop-filter: blur(8px); z-index: 200; align-items: flex-end; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal-sheet { background: #111; border: 1px solid rgba(255,255,255,.1); border-radius: 24px 24px 0 0; padding: 22px 22px 44px; width: 100%; max-width: 430px; animation: slideUp .28s cubic-bezier(.22,.68,0,1.2); }
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-handle { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.15); margin: 0 auto 20px; }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; text-align: center; margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 22px; }
+.coin-pkg { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: border-color .2s, background .2s; }
+.coin-pkg:hover { border-color: var(--accent); background: rgba(255,45,85,.07); }
+.coin-pkg.hot { border-color: rgba(255,45,85,.35); }
+.pkg-l { display: flex; align-items: center; gap: 13px; }
+.pkg-em { font-size: 26px; }
+.pkg-name { font-size: 15px; font-weight: 600; }
+.pkg-desc { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.pkg-price { font-size: 16px; color: var(--gold); font-weight: 600; }
+.btn-close { width: 100%; background: transparent; border: 1px solid rgba(255,255,255,.1); color: var(--muted); padding: 13px; border-radius: 14px; font-size: 14px; cursor: pointer; margin-top: 8px; font-family: 'DM Sans', sans-serif; }
+
+/* Toast */
+#toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-70px); background: #1c1c1e; border: 1px solid rgba(255,255,255,.15); padding: 10px 20px; border-radius: 20px; font-size: 13px; z-index: 999; transition: transform .3s cubic-bezier(.22,.68,0,1.2); white-space: nowrap; box-shadow: 0 8px 32px rgba(0,0,0,.6); }
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast.success { border-color: var(--green); color: var(--green); }
+#toast.drama { border-color: var(--accent); color: var(--accent); }
+
+@keyframes floatHeart { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-90px) scale(1.6); opacity: 0; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="toast"></div>
+
+  <div class="filter-bar" id="filter-bar">
+    <div class="fpill active" onclick="setFilter('all',this)">Всі серіали</div>
+  </div>
+
+  <div id="feed"></div>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active"><div class="nav-icon">🏠</div><span>Стрічка</span></button>
+    <button class="nav-btn" onclick="toggleFilter()"><div class="nav-icon">🎭</div><span>Серіали</span></button>
+    <button class="nav-btn" onclick="openShop()"><div class="nav-icon">🪙</div><span id="nc">15</span></button>
+    <button class="nav-btn" onclick="showToast('Профіль — скоро! 👤','drama')"><div class="nav-icon">👤</div><span>Профіль</span></button>
+  </nav>
+
+  <!-- Shop -->
+  <div class="modal-overlay" id="modal-shop">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title">🪙 Купити монети</div>
+      <div class="modal-sub">Баланс: <span id="shop-bal">15</span> монет</div>
+      <div id="shop-pkgs"></div>
+      <button class="btn-close" onclick="closeShop()">Закрити</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────────
+let coins    = parseInt(localStorage.getItem('db_coins') || '15');
+let unlocked = JSON.parse(localStorage.getItem('db_unlocked') || '[]');
+let liked    = JSON.parse(localStorage.getItem('db_liked') || '[]');
+let likeCounts = JSON.parse(localStorage.getItem('db_lc') || '{}');
+let filterSerial = 'all';
+let filterOpen = false;
+
+// Build flat episode list from content.js
+function buildEpList(filter) {
+  const eps = [];
+  CONTENT.serials.forEach(s => {
+    if (filter !== 'all' && s.id !== filter) return;
+    s.episodes.forEach(ep => {
+      eps.push({ ...ep, serialId: s.id, serialTitle: s.title, serialColor: s.color, serialEmoji: s.emoji, gradient: s.gradient });
+    });
+  });
+  return eps;
+}
+
+function isUnlocked(serialId, epId) {
+  const serial = CONTENT.serials.find(s => s.id === serialId);
+  const ep = serial?.episodes.find(e => e.id === epId);
+  return ep?.free || unlocked.includes(`${serialId}-${epId}`);
+}
+
+function fmtN(n) { return n >= 1000 ? (n/1000).toFixed(1)+'к' : n; }
+function getLikes(uid) { return likeCounts[uid] !== undefined ? likeCounts[uid] : (10000 + uid * 1337) % 30000 + 500; }
+
+function save() {
+  localStorage.setItem('db_coins', coins);
+  localStorage.setItem('db_unlocked', JSON.stringify(unlocked));
+  localStorage.setItem('db_liked', JSON.stringify(liked));
+  localStorage.setItem('db_lc', JSON.stringify(likeCounts));
+}
+
+// ─── RENDER FEED ──────────────────────────────────────────────────
+function buildFeed() {
+  const eps = buildEpList(filterSerial);
+  document.getElementById('feed').innerHTML = eps.map((ep, i) => renderCard(ep, i, eps.length)).join('');
+  buildFilterPills();
+  buildShopPkgs();
+  updateUI();
+  setupObserver();
+}
+
+function renderCard(ep, idx, total) {
+  const uid = `${ep.serialId}-${ep.id}`;
+  const locked = !isUnlocked(ep.serialId, ep.id);
+  const hasVideo = ep.video && ep.video.length > 0;
+  const isLiked = liked.includes(uid);
+  const lc = getLikes(ep.id + ep.serialId * 100);
+  const bg = `linear-gradient(160deg, ${ep.gradient[0]} 0%, ${ep.gradient[1]} 100%)`;
+
+  const videoHtml = hasVideo ? `
+    <div class="card-video-wrap">
+      <video class="card-video" id="vid-${uid}" src="${ep.video}"
+        playsinline webkit-playsinline muted loop preload="none"
+        ${ep.poster ? `poster="${ep.poster}"` : ''}></video>
+      <div class="tap-area" onclick="tapVideo('${uid}')"></div>
+      <div class="pause-icon" id="pi-${uid}">⏸</div>
+    </div>` : `
+    <div class="sim-bg" style="background:${bg}">
+      <div class="sim-emoji">${ep.serialEmoji}</div>
+    </div>`;
+
+  return `
+  <div class="drama-card" id="card-${uid}" data-uid="${uid}" data-serial="${ep.serialId}">
+    ${videoHtml}
+    <div class="scrim"></div>
+    <div class="prog-bar"><div class="prog-fill" id="pf-${uid}" style="background:${ep.serialColor}"></div></div>
+
+    <div class="card-top">
+      <div class="logo">${CONTENT.appName}<span>.</span></div>
+      <div class="coins-pill" onclick="openShop()">🪙 <span class="coin-count">${coins}</span></div>
+    </div>
+
+    <div class="ep-strip">Серія ${ep.id} · ${ep.serialTitle}</div>
+
+    <div class="actions">
+      <button class="action-btn ${isLiked?'liked':''}" onclick="toggleLike('${uid}',this)">
+        <div class="action-icon">${isLiked?'❤️':'🤍'}</div>
+        <span class="action-label" id="lc-${uid}">${fmtN(lc)}</span>
+      </button>
+      <button class="action-btn" onclick="showToast('Коментарі — скоро! 💬','drama')">
+        <div class="action-icon">💬</div><span class="action-label">Коменти</span>
+      </button>
+      <button class="action-btn" onclick="doShare('${uid}','${ep.title}')">
+        <div class="action-icon">↗️</div><span class="action-label">Поділ.</span>
+      </button>
+    </div>
+
+    <div class="card-bottom">
+      <div class="serial-chip" style="border-color:${ep.serialColor}55" onclick="setFilterById(${ep.serialId})">
+        <span class="chip-dot" style="background:${ep.serialColor}"></span>
+        ${ep.serialTitle}
+      </div>
+      ${hasVideo ? '<div class="video-badge">🎬 Відео</div>' : ''}
+      <div class="ep-title">${ep.title}</div>
+      ${!locked ? `
+        <div class="ep-desc">"${ep.description}"</div>
+        <div class="ep-cliff">⚡ ${ep.cliffhanger}</div>
+        ${!hasVideo ? `<button class="play-btn" id="pb-${uid}" onclick="startSim('${uid}')">▶ Дивитись ${ep.free?'· ✅ Безкоштовно':''}</button>` : ''}
+      ` : ''}
+    </div>
+
+    ${idx === 0 ? '<div class="scroll-hint">↑ &nbsp; Гортайте &nbsp; ↑</div>' : ''}
+    ${locked ? renderLock(ep, uid) : ''}
+  </div>`;
+}
+
+function renderLock(ep, uid) {
+  return `
+  <div class="lock-overlay" id="lock-${uid}">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">"${ep.title}"</div>
+    <div class="lock-sub">Серія ${ep.id} серіалу «${ep.serialTitle}»<br>Розблокуйте, щоб читати далі</div>
+    <div class="lock-cost">
+      <div class="lock-cost-num">${CONTENT.episodeCost} 🪙</div>
+      <div class="lock-cost-sub">У вас: <span class="lock-bal">${coins}</span> монет</div>
+    </div>
+    <button class="lock-btn" onclick="tryUnlock('${uid}',${ep.serialId},${ep.id})">
+      Розблокувати за ${CONTENT.episodeCost} 🪙
+    </button>
+    <button class="lock-btn-alt" onclick="openShop()">Купити монети</button>
+  </div>`;
+}
+
+// ─── FILTER ───────────────────────────────────────────────────────
+function buildFilterPills() {
+  const bar = document.getElementById('filter-bar');
+  const pills = CONTENT.serials.map(s =>
+    `<div class="fpill" onclick="setFilterById(${s.id})">${s.emoji} ${s.title}</div>`
+  ).join('');
+  bar.innerHTML = `<div class="fpill active" onclick="setFilter('all',this)">Всі серіали</div>${pills}`;
+}
+
+function setFilter(val, pillEl) {
+  filterSerial = val;
+  document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('active'));
+  if (pillEl) pillEl.classList.add('active');
+  buildFeed();
+  document.getElementById('feed').scrollTo({ top:0, behavior:'instant' });
+  if (val !== 'all') showToast(`🎬 Показую: ${CONTENT.serials.find(s=>s.id===val)?.title || val}`, 'drama');
+}
+
+function setFilterById(id) {
+  filterSerial = id;
+  document.querySelectorAll('.fpill').forEach(p=>{
+    p.classList.toggle('active', p.textContent.includes(CONTENT.serials.find(s=>s.id===id)?.title||''));
+  });
+  buildFeed();
+  document.getElementById('feed').scrollTo({ top:0, behavior:'instant' });
+  showToast(`🎬 ${CONTENT.serials.find(s=>s.id===id)?.title}`, 'drama');
+}
+
+function toggleFilter() {
+  filterOpen = !filterOpen;
+  document.getElementById('filter-bar').classList.toggle('open', filterOpen);
+}
+
+// ─── OBSERVER — автозапуск ────────────────────────────────────────
+const simTimers = {};
+
+function setupObserver() {
+  const feed = document.getElementById('feed');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const uid = entry.target.dataset.uid;
+      if (entry.isIntersecting) {
+        const vid = document.getElementById(`vid-${uid}`);
+        if (vid) {
+          vid.currentTime = 0; vid.play().catch(()=>{});
+          vid.ontimeupdate = () => {
+            const pct = vid.duration ? (vid.currentTime/vid.duration)*100 : 0;
+            const pf = document.getElementById(`pf-${uid}`);
+            if (pf) pf.style.width = pct + '%';
+            if (pct >= 95) { vid.ontimeupdate = null; autoNext(uid); }
+          };
+        }
+      } else {
+        const vid = document.getElementById(`vid-${uid}`);
+        if (vid) { vid.pause(); vid.ontimeupdate = null; }
+        stopSim(uid);
+      }
+    });
+  }, { root: feed, threshold: 0.65 });
+  document.querySelectorAll('.drama-card').forEach(c => obs.observe(c));
+}
+
+function tapVideo(uid) {
+  const vid = document.getElementById(`vid-${uid}`);
+  const pi  = document.getElementById(`pi-${uid}`);
+  if (!vid) return;
+  if (vid.paused) { vid.play(); pi.textContent='▶'; }
+  else { vid.pause(); pi.textContent='⏸'; }
+  pi.className = 'pause-icon show';
+  setTimeout(() => pi.className = 'pause-icon', 700);
+}
+
+function startSim(uid) {
+  if (simTimers[uid]) return;
+  const btn = document.getElementById(`pb-${uid}`);
+  if (btn) { btn.textContent = '⏸ Пауза'; btn.onclick = ()=>stopSim(uid, true); }
+  let p = 0;
+  simTimers[uid] = setInterval(() => {
+    p += 1.4;
+    const pf = document.getElementById(`pf-${uid}`);
+    if (pf) pf.style.width = Math.min(p,100)+'%';
+    if (p >= 100) { stopSim(uid); const b=document.getElementById(`pb-${uid}`); if(b){b.textContent='✅ Переглянуто';b.disabled=true;} showToast('🎬 Серія завершена! Гортайте вгору ↑','drama'); autoNext(uid); }
+  }, 120);
+}
+
+function stopSim(uid, pause=false) {
+  clearInterval(simTimers[uid]); delete simTimers[uid];
+  if (pause) { const b=document.getElementById(`pb-${uid}`); if(b){b.textContent='▶ Продовжити';b.onclick=()=>startSim(uid);} }
+}
+
+function autoNext(uid) {
+  const card = document.getElementById(`card-${uid}`);
+  if (!card) return;
+  const next = card.nextElementSibling;
+  if (next) setTimeout(() => next.scrollIntoView({ behavior:'smooth' }), 900);
+}
+
+// ─── UNLOCK ───────────────────────────────────────────────────────
+function tryUnlock(uid, serialId, epId) {
+  if (coins >= CONTENT.episodeCost) {
+    coins -= CONTENT.episodeCost;
+    unlocked.push(uid);
+    save(); updateUI();
+    const serial = CONTENT.serials.find(s=>s.id===serialId);
+    const ep = serial.episodes.find(e=>e.id===epId);
+    const idx = buildEpList(filterSerial).findIndex(e=>e.serialId===serialId&&e.id===epId);
+    const old = document.getElementById(`card-${uid}`);
+    const tmp = document.createElement('div');
+    tmp.innerHTML = renderCard({...ep, serialId, serialTitle:serial.title, serialColor:serial.color, serialEmoji:serial.emoji, gradient:serial.gradient}, idx, 0);
+    old.replaceWith(tmp.firstElementChild);
+    setupObserver();
+    showToast('✅ Серію розблоковано!','success');
+  } else {
+    showToast('Недостатньо монет! 🪙','drama');
+    openShop();
+  }
+}
+
+// ─── LIKE ─────────────────────────────────────────────────────────
+function toggleLike(uid, btn) {
+  const cur = getLikes(parseInt(uid.split('-')[1]) + parseInt(uid.split('-')[0])*100);
+  if (liked.includes(uid)) {
+    liked = liked.filter(x=>x!==uid);
+    likeCounts[uid] = cur - 1;
+    btn.classList.remove('liked'); btn.querySelector('.action-icon').textContent='🤍';
+  } else {
+    liked.push(uid);
+    likeCounts[uid] = cur + 1;
+    btn.classList.add('liked'); btn.querySelector('.action-icon').textContent='❤️';
+    showToast('❤️ Вподобано!','success');
+    const card = document.getElementById(`card-${uid}`);
+    const h = document.createElement('div');
+    h.textContent='❤️'; h.style.cssText=`position:absolute;right:44px;bottom:${145+Math.random()*40}px;font-size:28px;z-index:50;pointer-events:none;animation:floatHeart .9s ease forwards;`;
+    card?.appendChild(h); setTimeout(()=>h.remove(),950);
+  }
+  const el = document.getElementById(`lc-${uid}`);
+  if (el) el.textContent = fmtN(getLikes(parseInt(uid.split('-')[1]) + parseInt(uid.split('-')[0])*100));
+  save();
+}
+
+function doShare(uid, title) {
+  if (navigator.share) navigator.share({ title, url: location.href });
+  else showToast('Посилання скопійовано! 🔗','success');
+}
+
+// ─── SHOP ─────────────────────────────────────────────────────────
+function buildShopPkgs() {
+  const cp = CONTENT.coinPrice;
+  document.getElementById('shop-pkgs').innerHTML = [
+    { ...cp.small, em:'🌱', hot:false },
+    { ...cp.medium, em:'🔥', hot:true },
+    { ...cp.large, em:'💎', hot:false },
+  ].map(p=>`
+    <div class="coin-pkg ${p.hot?'hot':''}" onclick="buyCoins(${p.coins})">
+      <div class="pkg-l"><div class="pkg-em">${p.em}</div>
+        <div><div class="pkg-name">${p.coins} монет</div><div class="pkg-desc">${p.label}</div></div></div>
+      <div class="pkg-price">${p.price}</div>
+    </div>`).join('');
+}
+
+function openShop() { document.getElementById('shop-bal').textContent=coins; document.getElementById('modal-shop').classList.add('open'); }
+function closeShop() { document.getElementById('modal-shop').classList.remove('open'); }
+function buyCoins(n) { coins+=n; save(); updateUI(); closeShop(); showToast(`🪙 +${n} монет!`,'success'); }
+
+function updateUI() {
+  document.querySelectorAll('.coin-count').forEach(el=>el.textContent=coins);
+  document.querySelectorAll('.lock-bal').forEach(el=>el.textContent=coins);
+  document.getElementById('nc').textContent=coins;
+  document.getElementById('shop-bal').textContent=coins;
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────
+let toastT;
+function showToast(msg,type='info') {
+  const t=document.getElementById('toast'); t.textContent=msg; t.className=`show ${type}`;
+  clearTimeout(toastT); toastT=setTimeout(()=>t.className='',2600);
+}
+
+document.getElementById('modal-shop').addEventListener('click',function(e){if(e.target===this)closeShop();});
+
+buildFeed();
+</script>
+</body>
+</html>
